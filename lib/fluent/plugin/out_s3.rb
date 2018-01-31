@@ -70,6 +70,8 @@ module Fluent::Plugin
     config_param :s3_endpoint, :string, default: nil
     desc "If false, the certificate of endpoint will not be verified"
     config_param :ssl_verify_peer, :bool, :default => true
+    desc "If true, AWS transfer acceleration endpoint will be used, if enabled on S3 bucket"
+    config_param :use_accelerate_endpoint, :bool, :default => false
     desc "The format of S3 object keys"
     config_param :s3_object_key_format, :string, default: "%{path}%{time_slice}_%{index}.%{file_extension}"
     desc "If true, the bucket name is always left in the request URI and never moved to the host as a sub-domain"
@@ -203,6 +205,7 @@ module Fluent::Plugin
       options[:compute_checksums] = @compute_checksums unless @compute_checksums.nil?
       options[:signature_version] = @signature_version unless @signature_version.nil?
       options[:ssl_verify_peer] = @ssl_verify_peer
+      options[:use_accelerate_endpoint] = @use_accelerate_endpoint
       log.on_trace do
         options[:http_wire_trace] = true
         options[:logger] = log
