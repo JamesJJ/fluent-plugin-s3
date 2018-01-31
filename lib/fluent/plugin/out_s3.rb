@@ -307,6 +307,7 @@ module Fluent::Plugin
         put_options[:grant_read] = @grant_read if @grant_read
         put_options[:grant_read_acp] = @grant_read_acp if @grant_read_acp
         put_options[:grant_write_acp] = @grant_write_acp if @grant_write_acp
+        put_options[:use_accelerate_endpoint] = @use_accelerate_endpoint
 
         if @s3_metadata
           put_options[:metadata] = {}
